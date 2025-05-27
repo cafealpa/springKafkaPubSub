@@ -5,7 +5,6 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ public class AvroReadConsumerService {
 
     private static final Logger logger = LoggerFactory.getLogger(AvroReadConsumerService.class);
 
-//    private final KafkaTemplate<String, SUser> kafkaTemplate;
+    //    private final KafkaTemplate<String, SUser> kafkaTemplate;
     private final String TOPIC = "SUser-avro";
     private final String GROUP_ID = "My-SUser-read-group";
 
@@ -22,12 +21,12 @@ public class AvroReadConsumerService {
 //        this.kafkaTemplate = kafkaTemplate;
 //    }
 
-    @KafkaListener(topics = TOPIC, groupId = GROUP_ID)
+    @KafkaListener(id = "myUserConsumer", topics = TOPIC, groupId = GROUP_ID)
     public void readUser(ConsumerRecord<String, SUser> recode, Acknowledgment acknowledgment) {
         String key = recode.key();
         SUser user = recode.value();
 
-        System.out.println("key="+key);
+        System.out.println("key=" + key);
         System.out.println("user = " + user);
 
         logger.info("Received message from topic '{}', partition {}, offset {}", recode.topic(), recode.partition(), recode.offset());
@@ -41,7 +40,6 @@ public class AvroReadConsumerService {
         }
 
     }
-
 
 
 }

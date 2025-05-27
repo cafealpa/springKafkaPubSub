@@ -32,7 +32,7 @@ spring:
       value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
     # 수동 커밋을 위한 설정
     listener:
-      ack-mode: manual_immediate
+      ack-mode: manual
   application:
     name: springKafkaPubSub
 

@@ -13,11 +13,11 @@ public class AvroRebalanceAwareConsumerService {
 
     private static final Logger logger = LoggerFactory.getLogger(AvroRebalanceAwareConsumerService.class);
     
-    private final String TOPIC = "SUser-rebalance-topic";
-    private final String GROUP_ID = "rebalance-aware-group";
+//    private final String TOPIC = "SUser-rebalance-topic";
+//    private final String GROUP_ID = "rebalance-aware-group";
 
     @KafkaListener(
-        topics = "${kafka.topic.example:example-topic}", 
+        topics = "example-topic",
         groupId = "${spring.kafka.consumer.group-id:rebalance-test-group}",
         containerFactory = "kafkaListenerContainerFactory"
     )

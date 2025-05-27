@@ -8,9 +8,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.kafka.core.KafkaTemplate;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
 @ExtendWith(MockitoExtension.class)
 public class AvroProducerServiceTest {
 
@@ -37,7 +34,7 @@ public class AvroProducerServiceTest {
         user.setEmail(userEmail);
 
         // When
-        avroProducerService.sendUser(user);
+        avroProducerService.sendUser("SUser-avro", user);
 
         // Then
 //        verify(kafkaTemplate, times(1)).send("SUser-avro", userId, user);
@@ -55,7 +52,7 @@ public class AvroProducerServiceTest {
         user.setEmail(null); // Email is nullable
 
         // When
-        avroProducerService.sendUser(user);
+        avroProducerService.sendUser("SUser-avro", user);
 
         // Then
 //        verify(kafkaTemplate, times(1)).send("SUser-avro", userId, user);

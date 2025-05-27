@@ -2,7 +2,6 @@ package com.example.springkafkapubsub.controller;
 
 import com.example.springkafkapubsub.config.AdvancedKafkaConsumerAwareRebalanceListener;
 import org.apache.kafka.common.TopicPartition;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +13,11 @@ import java.util.Map;
 @RequestMapping("/api/kafka")
 public class KafkaRebalanceController {
 
-    @Autowired
-    private AdvancedKafkaConsumerAwareRebalanceListener rebalanceListener;
+    private final AdvancedKafkaConsumerAwareRebalanceListener rebalanceListener;
+
+    public KafkaRebalanceController(AdvancedKafkaConsumerAwareRebalanceListener rebalanceListener) {
+        this.rebalanceListener = rebalanceListener;
+    }
 
     @GetMapping("/rebalance/offsets")
     public Map<String, Long> getPartitionOffsets() {
