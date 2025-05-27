@@ -9,9 +9,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
-@EnableKafka
+import java.util.concurrent.TimeUnit;
+
 @SpringBootApplication
+@EnableKafka
+@EnableScheduling
 public class SpringKafkaPubSubApplication {
 
     public static void main(String[] args) {
@@ -22,12 +27,15 @@ public class SpringKafkaPubSubApplication {
     @Autowired
     private AvroProducerService avroProducerService;
 
-    @EventListener(ApplicationReadyEvent.class)
+    @Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
     public void sendUser() {
         // Given
-        String userId = "user1235";
-        String userName = "John Doe5";
-        String userEmail = "john.doe5@example.com";
+//        String userId = "user1235";
+        long timestamp = System.currentTimeMillis();
+        String userId = "userId" + timestamp;
+
+        String userName = "John Doe" + timestamp;
+        String userEmail = "john.doe@example.com";
 
         SUser user = new SUser();
         user.setId(userId);
@@ -41,3 +49,4 @@ public class SpringKafkaPubSubApplication {
 
 
 }
+

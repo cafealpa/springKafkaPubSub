@@ -38,6 +38,11 @@ dependencies {
     implementation 'io.confluent:kafka-avro-serializer:7.9.0' // Confluent Platform 버전과 호환되는 버전 사용
     implementation 'io.confluent:kafka-schema-registry-client:7.9.0'
 
+    // https://mvnrepository.com/artifact/com.fasterxml.uuid/java-uuid-generator
+    implementation 'com.fasterxml.uuid:java-uuid-generator:5.1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
