@@ -1,0 +1,10 @@
+{
+    "type":"record",
+    "name":"SUser",
+    "namespace":"com.example.kafkapubsub.avro",
+    "fields": [
+        {"name": "id", "type": "string"},
+        {"name": "name", "type": "string"},
+        {"name": "email", "type": ["string", "null"], "default": "null"}
+    ]
+}
