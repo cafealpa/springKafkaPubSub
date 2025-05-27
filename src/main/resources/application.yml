@@ -1,0 +1,42 @@
+spring:
+  # Kafka Producer Configuration
+  kafka:
+    producer:
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      acks: '1'
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: '3'
+      properties:
+        schema:
+          registry:
+            url: http://192.168.1.107:8081
+      bootstrap-servers: 192.168.1.107:9092
+      batch-size: '16384'
+      buffer-memory: '33554432'
+
+    # Kafka Consumer Configuration
+    consumer:
+      group-id: kafkaPubSub-group
+      properties:
+        schema:
+          registry:
+            url: http://192.168.1.107:8081
+        specific:
+          avro:
+            reader: 'true'
+      enable-auto-commit: 'false'
+      auto-offset-reset: earliest
+      bootstrap-servers: 192.168.1.107:9092
+      auto-commit-interval: '1000'
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+    # 수동 커밋을 위한 설정
+    listener:
+      ack-mode: manual_immediate
+  application:
+    name: springKafkaPubSub
+
+# Kafka Topics
+kafka:
+  topic:
+    example: example-topic
