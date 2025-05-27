@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+/gradle/wrapper/gradle-wrapper.properties
+/.gitattributes
+/gradle/wrapper/gradle-wrapper.jar
